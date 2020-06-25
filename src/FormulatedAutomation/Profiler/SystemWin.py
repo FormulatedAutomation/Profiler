@@ -12,7 +12,7 @@ class SystemWin:
 
     """
 
-    def write_profile_to_output(self):
+    def write_profile(self):
         output_dir = BuiltIn().get_variable_value('${OUTPUT_DIR}')
         output_file = os.path.join(output_dir, "fa_report.yaml")
         variables = Utils.dump_collection(BuiltIn().get_variables())
@@ -20,8 +20,8 @@ class SystemWin:
             'variables': variables,
             'system': self.system_info(),
             'programs': {
-                'uninstall_list': self._get_uninstall_list,
-                'office_info': self._get_office_info,
+                'uninstall_list': self._get_uninstall_list(),
+                'office_info': self._get_office_info(),
             }
         }
         with open(output_file, 'w') as f:
@@ -82,5 +82,4 @@ class SystemWin:
             self._dump_program_list_from_hive(winreg.HKEY_LOCAL_MACHINE, winreg.KEY_WOW64_32KEY)
             + self._dump_program_list_from_hive(winreg.HKEY_LOCAL_MACHINE, winreg.KEY_WOW64_64KEY)
             + self._dump_program_list_from_hive(winreg.HKEY_CURRENT_USER, 0)
-            + [self._get_office_real_version()]
         )

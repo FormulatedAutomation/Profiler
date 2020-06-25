@@ -6,9 +6,8 @@ Suite Teardown  Teardown
 
 *** Keywords ***
 Teardown
-    Write Profile To Output
+    Write Profile
 
 *** Test Cases ***
 Get a system profile
     Set Breakpoint
-    Write profile to output
