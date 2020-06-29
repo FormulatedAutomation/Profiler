@@ -4,6 +4,9 @@ Library  FormulatedAutomation.Profiler.Debug
 
 Suite Teardown  Teardown
 
+*** Variables ***
+${SecretKey}   SuperSecretKey
+
 *** Keywords ***
 Teardown
     Write Profile

@@ -1,37 +1,18 @@
 """ Keywords for generating a profile of the system we are running on"""
 
-import os
-import yaml
-import platform
 import winreg
-from robot.libraries.BuiltIn import BuiltIn
-from .utils import Utils
+from .system_base import SystemBase
 
-class SystemWin:
+
+class SystemWin(SystemBase):
     """Library for generating a profile report on the current system
 
     """
 
-    def write_profile(self):
-        output_dir = BuiltIn().get_variable_value('${OUTPUT_DIR}')
-        output_file = os.path.join(output_dir, "fa_report.yaml")
-        variables = Utils.dump_collection(BuiltIn().get_variables())
-        output = {
-            'variables': variables,
-            'system': self.system_info(),
-            'programs': {
-                'uninstall_list': self._get_uninstall_list(),
-                'office_info': self._get_office_info(),
-            }
-        }
-        with open(output_file, 'w') as f:
-            yaml.dump(output, f, default_flow_style=False)
-
-    def system_info(self):
+    def get_programs(self):
         return {
-            'system': platform.system(),
-            'platform': platform.platform(),
-            'processor': platform.processor(),
+            'uninstall_list': self._get_uninstall_list(),
+            'office_info': self._get_office_info(),
         }
 
     def _dump_program_list_from_hive(self, hive, flag):

@@ -1,6 +1,12 @@
+""" Platform selector for System
+"""
+
 import platform
 
-if platform.system() == 'Windows':
+system = platform.system().lower()
+if system == 'windows':
     from .SystemWin import SystemWin as System
+elif system == 'darwin':
+    from .SystemDarwin import SystemDarwin as System
 else:
-    from .SystemPosix import SystemPosix as System
+    from .SystemLinux import SystemLinux as System

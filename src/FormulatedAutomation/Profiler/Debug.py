@@ -28,14 +28,14 @@ class Debug:
             BuiltIn().run_keyword("Pause Execution", "Paused execution for debugging, click OK to continue")
 
     # Helper for letting us print out the current variables inside of `pdb`
-    # Ex. `self.__print_variables()`
+    # Ex. `self._print_variables()`
     def _print_variables(self):
         # TODO: Recursively dump the NormalizedDict and optionally hide secrets
         variables = {k: v for k, v in BuiltIn().get_variables().items()}
         pprint.pprint(variables)
 
     # Helper for letting us print out the environment variables inside of `pdb`
-    # Ex. `self.__print_envs()`
+    # Ex. `self._print_envs()`
     def _print_envs(self):
         variables = {k: v for k, v in os.environ.items()}
         pprint.pprint(variables)
