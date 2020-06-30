@@ -1,15 +1,19 @@
 FormulatedAutomation-Profiler
-==================
-
-.. contents::
-
-**In Alpha, rapidly changing**
+=============================
 
 Introduction
 ------------
 
+The purpose of this project is to record a snapshot of the runtime environment for an automation workspace.  This
+includes recording installed applications and their versions on the machine.  This is especially useful when
+automations stop working and allows for rapid debugging of machine prior and current states.
+
+⚠️ This project is currently a work in process and should not be used in production environments. ⚠️
+
 Installation
 ------------
+- Create a virtual environment
+- `pip install -e git+https://github.com/FormulatedAutomation/robot-profiler.git#egg=robot-profiler`
 
 Usage
 -----
@@ -29,4 +33,13 @@ Usage
 Testing
 -------
 
-`$Env:ROBOT_DEBUG = "FALSE"; robot -d output -P src tests`
+This library expects teh `ROBOT_DEBUG` environment variable to be set.  You can do this however suits your platform:
+
+Powershell: `$Env:ROBOT_DEBUG="FALSE"`
+Windows CMD: `set ROBOT_DEBUG="FALSE"`
+
+Execute the tests in this project:
+
+.. code:: bash
+
+    robot -d output -P src tests
