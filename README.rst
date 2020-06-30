@@ -1,6 +1,8 @@
 FormulatedAutomation-Profiler
 =============================
 
+.. contents::
+
 Introduction
 ------------
 
