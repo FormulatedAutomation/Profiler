@@ -1,3 +1,6 @@
+"""
+Utils Modules for shared tasks
+"""
 from collections.abc import Mapping
 
 class Utils:
@@ -12,7 +15,8 @@ class Utils:
         for k, v in d.items():
             # TODO: @mdp handle obscuring secrets here
             if isinstance(v, Mapping):
-                out[k] = Utils.dump_collection(v, secret_key_regex=secret_key_regex)
+                out[k] = Utils.dump_collection(
+                    v, secret_key_regex=secret_key_regex)
             elif secret_key_regex and secret_key_regex.match(k):
                 out[k] = "***SECRET REDACTED***"
             else:
