@@ -38,9 +38,7 @@ class SystemBase:
     def write_profile(self):
         """ Write out the system profile in the output directory """
         output_dir = BuiltIn().get_variable_value('${OUTPUT_DIR}')
-        BuiltIn().log(output_dir, console=True)
         output_file = os.path.join(output_dir, "fa_report.yaml")
-        BuiltIn().log(output_file, console=True)
         variables = Utils.dump_collection(
             BuiltIn().get_variables(),
             secret_key_regex=self.config['secret_key_regex'])
@@ -62,7 +60,7 @@ class SystemBase:
         top level, we want to be able to put the most important information
         first.
         """
-        with open(outfile, 'w') as f:
+        with open(outfile, 'w+') as f:
             yaml.dump({'metadata': profile['metadata']},
                       f, default_flow_style=False)
             yaml.dump({'system': profile['system']},
