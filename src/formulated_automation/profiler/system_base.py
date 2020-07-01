@@ -63,16 +63,12 @@ class SystemBase:
         with open(outfile, 'w') as f:
             yaml.dump({'metadata': profile['metadata']},
                       f, default_flow_style=False)
-        with open(outfile, 'a') as f:
             yaml.dump({'system': profile['system']},
                       f, default_flow_style=False)
-        with open(outfile, 'a') as f:
             yaml.dump({'variables': profile['variables']},
                       f, default_flow_style=False)
-        with open(outfile, 'a') as f:
             yaml.dump(
                 {'environment_variables': profile['environment_variables']},
                 f, default_flow_style=False)
-        with open(outfile, 'a') as f:
             yaml.dump({'programs': profile['programs']},
                       f, default_flow_style=False)
