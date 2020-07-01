@@ -1,10 +1,15 @@
 version: 2.1
+
+orbs:
+  python: circleci/python@0.2.1
+
 jobs:
-  build:
-    docker:
-      - image: circleci/python:3.6.2-stretch-browsers
+  build-and-test:
+    executor: python/default
     steps:
       - checkout
       - python/load-cache
+      - run:
+        command: pip install -r requirements/dev.txt
+        name: Install Deps
       - python/save-cache
-      - run: pip install -r requirements/dev.txt
