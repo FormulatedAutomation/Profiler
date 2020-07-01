@@ -3,6 +3,7 @@ System profiling base module abstraction
 """
 import re
 import os
+from pathlib import Path
 import datetime
 import platform
 import yaml
@@ -16,7 +17,7 @@ class SystemBase:
     def __init__(self):
         # def __init__(self, config_file=False):
         self.config = {
-            'secret_key_regex': re.compile('.?secret*', re.IGNORECASE),
+            'secret_key_regex': re.compile('.*secret.*', re.IGNORECASE),
         }
         # TODO: @mdp parse a config file here if it's passed in
 
@@ -25,12 +26,18 @@ class SystemBase:
         return {}
 
     def system_info(self):
-        return {
-            'login': os.getlogin(),
+        info = {
             'system': platform.system(),
             'platform': platform.platform(),
             'processor': platform.processor(),
         }
+        try:
+            # Will fail in restricted shells
+            info['system'] = os.getlogin()
+        except OSError:
+            pass
+
+        return info
 
     def system_environment_variables(self):
         return Utils.dump_collection(os.environ)
@@ -60,19 +67,16 @@ class SystemBase:
         top level, we want to be able to put the most important information
         first.
         """
-        with open(outfile, 'w') as f:
+
+        with open(outfile, 'w+') as f:
             yaml.dump({'metadata': profile['metadata']},
                       f, default_flow_style=False)
-        with open(outfile, 'a') as f:
             yaml.dump({'system': profile['system']},
                       f, default_flow_style=False)
-        with open(outfile, 'a') as f:
             yaml.dump({'variables': profile['variables']},
                       f, default_flow_style=False)
-        with open(outfile, 'a') as f:
             yaml.dump(
                 {'environment_variables': profile['environment_variables']},
                 f, default_flow_style=False)
-        with open(outfile, 'a') as f:
             yaml.dump({'programs': profile['programs']},
                       f, default_flow_style=False)

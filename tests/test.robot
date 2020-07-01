@@ -12,5 +12,5 @@ Teardown
     Write Profile
 
 *** Test Cases ***
-Get a system profile
+Set a breakpoint
     Set Breakpoint

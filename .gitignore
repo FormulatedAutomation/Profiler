@@ -16,3 +16,5 @@ __pycache__/
 
 # Allow symlink to docs
 !/index.html
+
+.tox
