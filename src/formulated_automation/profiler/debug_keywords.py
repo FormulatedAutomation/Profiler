@@ -12,10 +12,11 @@ class Debug:
     def __init__(self):
         self.__imported_required_libraries = False
 
-    # Let's us call 'Set Breakpoint' anyhwere in our robot framework code.
-    # Will drop to `pdb` at which point we can run anything we like from
-    # python interpreter
     def set_breakpoint(self):
+        """ Let's us call 'Set Breakpoint' anyhwere in our robot framework code.
+            Will drop to `pdb` at which point we can run anything we like from
+            python interpreter
+        """
         if self.__is_debug_mode():
             #pylint: disable=import-outside-toplevel
             import sys
@@ -57,7 +58,7 @@ class Debug:
     # set to TRUE This prevents us from accidentally setting a breakpoint and
     # launching it in production
     def __is_debug_mode(self):
-        return os.environ['ROBOT_DEBUG'] == 'TRUE'
+        return os.getenv('ROBOT_DEBUG', 'FALSE') == 'TRUE'
 
     # In order to use "Pause Execution" we need to import Dialog
     def __import_required_libraries(self):
