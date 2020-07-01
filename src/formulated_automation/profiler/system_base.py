@@ -3,6 +3,7 @@ System profiling base module abstraction
 """
 import re
 import os
+from pathlib import Path
 import datetime
 import platform
 import yaml
@@ -60,6 +61,9 @@ class SystemBase:
         top level, we want to be able to put the most important information
         first.
         """
+        # Ensure the path exists
+        Path(os.path.dirname(outfile)).mkdir(parents=True, exist_ok=True)
+
         with open(outfile, 'w+') as f:
             yaml.dump({'metadata': profile['metadata']},
                       f, default_flow_style=False)
