@@ -1,6 +1,6 @@
 *** Settings ***
-Library  formulated_automation.profiler.System
-Library  formulated_automation.profiler.Debug
+Library  FormulatedAutomation.Profiler.System
+Library  FormulatedAutomation.Profiler.Debug
 
 Suite Teardown  Teardown
 

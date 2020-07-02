@@ -1,3 +1,5 @@
+.. include:: RESOURCES.rst
+
 FormulatedAutomation-Profiler
 =============================
 

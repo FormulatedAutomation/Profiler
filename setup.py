@@ -1,5 +1,9 @@
 #!/usr/bin/env python
 
+"""
+setup.py - Build using tox
+"""
+
 import re
 import os
 from os.path import abspath, dirname, join
@@ -7,7 +11,7 @@ from setuptools import setup
 
 CURDIR = dirname(abspath(__file__))
 REQUIREMENTS = ['robotframework >= 3.0']
-with open(join(CURDIR, 'src', 'formulated_automation', 'version.py')) as f:
+with open(join(CURDIR, 'src', 'FormulatedAutomation', 'version.py')) as f:
     VERSION = re.search("^VERSION = '(.*)'", f.read()).group(1)
 with open(join(CURDIR, 'README.rst'), encoding='utf-8') as f:
     DESCRIPTION = f.read()
@@ -38,5 +42,5 @@ setup(
     classifiers=CLASSIFIERS,
     install_requires=REQUIREMENTS,
     package_dir={'': 'src'},
-    packages=['formulated_automation']
+    packages=['FormulatedAutomation']
 )

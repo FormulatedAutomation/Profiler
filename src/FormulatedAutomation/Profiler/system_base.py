@@ -3,7 +3,6 @@ System profiling base module abstraction
 """
 import re
 import os
-from pathlib import Path
 import datetime
 import platform
 import yaml
@@ -26,6 +25,8 @@ class SystemBase:
         return {}
 
     def system_info(self):
+        """ Get System Info for profiling
+        """
         info = {
             'system': platform.system(),
             'platform': platform.platform(),
