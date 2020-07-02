@@ -2,7 +2,7 @@
 """
 
 import platform
-from .debug_keywords import Debug
+from .DebugKeywords import Debug
 
 system = platform.system().lower()
 if system == 'windows':
