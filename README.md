@@ -14,7 +14,7 @@
 
 # FormulatedAutomation-Profiler
 
-[![FormulatedAutomation](https://circleci.com/gh/FormulatedAutomation/robot-profiler.svg?style=shield)](https://app.circleci.com/pipelines/github/FormulatedAutomation/robot-profiler)
+[![FormulatedAutomation](https://circleci.com/gh/FormulatedAutomation/Profiler.svg?style=shield)](https://app.circleci.com/pipelines/github/FormulatedAutomation/Profiler)
 
 ### Introduction
 
