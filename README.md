@@ -12,9 +12,9 @@
 -   [Formulated Automation Podcast](https://www.formulatedautomation.com/category/podcast/)
 
 
-[![FormulatedAutomation](https://circleci.com/gh/FormulatedAutomation/robot-profiler.svg?style=shield)](https://app.circleci.com/pipelines/github/FormulatedAutomation/robot-profiler)
-
 # FormulatedAutomation-Profiler
+
+[![FormulatedAutomation](https://circleci.com/gh/FormulatedAutomation/robot-profiler.svg?style=shield)](https://app.circleci.com/pipelines/github/FormulatedAutomation/robot-profiler)
 
 ### Introduction
 
