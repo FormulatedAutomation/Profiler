@@ -1,5 +1,4 @@
-Formulated Autoamation RPA Resources
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**Formulated Autoamation RPA Resources**
 
 - `/r/OpenSourceRPA <https://reddit.com/r/OpenSourceRPA>`_
 - `OpenSource RPA LinkedIn Group <https://www.linkedin.com/groups/12366622/>`_
