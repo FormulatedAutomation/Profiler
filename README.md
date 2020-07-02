@@ -1,3 +1,6 @@
+![Formulated Logo](https://www.formulatedautomation.com/wp-content/uploads/2020/07/Subtract-20.svg)
+[![FormulatedAutomation](https://circleci.com/gh/FormulatedAutomation/robot-profiler.svg?style=shield)](https://app.circleci.com/pipelines/github/FormulatedAutomation/robot-profiler)
+
 **Formulated Autoamation RPA Resources**
 
 

@@ -13,7 +13,7 @@ CURDIR = dirname(abspath(__file__))
 REQUIREMENTS = ['robotframework >= 3.0']
 with open(join(CURDIR, 'src', 'FormulatedAutomation', 'version.py')) as f:
     VERSION = re.search("^VERSION = '(.*)'", f.read()).group(1)
-with open(join(CURDIR, 'README.rst'), encoding='utf-8') as f:
+with open(join(CURDIR, 'README.md'), encoding='utf-8') as f:
     DESCRIPTION = f.read()
 print(dir(os.listdir(CURDIR)))
 CLASSIFIERS = '''
