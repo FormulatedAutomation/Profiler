@@ -1,14 +1,14 @@
-Formulated Autoamation RPA Resources
-====================================
+**Formulated Autoamation RPA Resources**
+
 
 -   [/r/OpenSourceRPA](https://reddit.com/r/OpenSourceRPA)
 -   [OpenSource RPA LinkedIn
     Group](https://www.linkedin.com/groups/12366622/)
 -   [FormulatedAutomation's YouTube
     Screencasts](https://www.youtube.com/channel/UC_IMgIFlNBG94Vm8tNCNeUQ)
+-   [Formulated Automation Podcast](https://www.formulatedautomation.com/category/podcast/)
 
-FormulatedAutomation-Profiler
------------------------------
+# FormulatedAutomation-Profiler
 
 ### Introduction
 
