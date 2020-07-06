@@ -29,9 +29,25 @@ class SystemBase:
         }
         # TODO: @mdp parse a config file here if it's passed in
 
-    def get_programs(self):
-        # Override this in system specific profile classes
-        return {}
+    def get_profile(self):
+        """ Collects all the profile information for the system we are on
+        Should be overridden in system specific classes and added to
+        """
+        variables = Utils.dump_collection(
+            BuiltIn().get_variables(),
+            secret_key_regex=self.config['secret_key_regex'])
+        return {
+            'metadata': {
+                'run_at': datetime.datetime.utcnow(),
+                'profiler': self.__class__.__name__,
+            },
+            'robot_framework': {
+                'variables': variables,
+            },
+            'system': self.system_info(),
+            'python': self.python(),
+        }
+
 
     def system_info(self):
         """ Get System Info for profiling
@@ -62,10 +78,6 @@ class SystemBase:
             'exec_prefix': sys.exec_prefix,
             'packages': self.python_packages(),
         }
-        installed_packages = pkg_resources.working_set
-        installed_packages_list = sorted(["%s==%s" % (i.key, i.version)
-                                          for i in installed_packages])
-        return installed_packages_list
 
     def python_packages(self):
         """ List out all the installed python packages and versions
@@ -79,21 +91,7 @@ class SystemBase:
         """ Write out the system profile in the output directory """
         output_dir = BuiltIn().get_variable_value('${OUTPUT_DIR}')
         output_file = os.path.join(output_dir, "fa_report.yaml")
-        variables = Utils.dump_collection(
-            BuiltIn().get_variables(),
-            secret_key_regex=self.config['secret_key_regex'])
-        profile = {
-            'metadata': {
-                'run_at': datetime.datetime.utcnow(),
-                'profiler': self.__class__.__name__,
-            },
-            'robot_framework': {
-                'variables': variables,
-            },
-            'system': self.system_info(),
-            'python': self.python(),
-            'programs': self.get_programs(),
-        }
+        profile = self.get_profile()
         # TODO: @mdp allow for sending as JSON to a remote endpoint
         self.__write_orderly_yaml(profile, output_file)
 

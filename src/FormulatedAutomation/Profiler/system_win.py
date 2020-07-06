@@ -11,6 +11,13 @@ class SystemWin(SystemBase):
 
     """
 
+    def get_profile(self):
+        profile = super().get_profile()
+        profile['windows'] = {
+            'programs': self.get_programs(),
+        }
+        return profile
+
     def get_programs(self):
         return {
             'uninstall_list': self._get_uninstall_list(),
