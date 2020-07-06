@@ -33,7 +33,7 @@ setup(
     version=VERSION,
     description='Robot Framework System Profiler',
     long_description=DESCRIPTION,
-    long_description_content_type="text/markdown,
+    long_description_content_type="text/markdown",
     author='Formulated Automation',
     author_email='hello@formulatedautomation.com',
     url='https://github.com/FormulatedAutomation/Profiler',
