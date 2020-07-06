@@ -29,13 +29,14 @@ Framework :: Robot Framework :: Library
 '''.strip().splitlines()
 
 setup(
-    name='robotframework-profiler',
+    name='fa-profiler',
     version=VERSION,
     description='Robot Framework System Profiler',
     long_description=DESCRIPTION,
+    long_description_content_type="text/markdown,
     author='Formulated Automation',
     author_email='hello@formulatedautomation.com',
-    url='https://github.com/itsautomic/robotframework-otp',
+    url='https://github.com/FormulatedAutomation/Profiler',
     license='Apache License 2.0',
     keywords='robotframework testing testautomation profiler',
     platforms='any',

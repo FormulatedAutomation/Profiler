@@ -12,6 +12,7 @@ __pycache__/
 
 #PyPi Project
 /dist
+/build
 *.egg-info
 
 # Allow symlink to docs
