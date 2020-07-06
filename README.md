@@ -60,6 +60,9 @@ In this file is a profile of the system you ran on, which includes things like
 It's organized in a way that makes 'diffing' it with a previous report trivial
 and therefore makes it easy to see what's changed between runs.
 
+
+[Sample Report from Linux CI](https://35-274999902-gh.circle-artifacts.com/0/output/fa_report.yaml)
+
 ##### Omitting secrets from the profile
 
 There's a good chance you're setting a varaible to something you don't want
@@ -96,7 +99,7 @@ keywords are accidentally set.
 
 __Command Line Example:__
 
-Powershell: `$Env:ROBOT_DEBUG = "TRUE"; robot -d output -P src tests `
+Powershell: `$Env:ROBOT_DEBUG = "TRUE"; robot -d output -P src tests `  
 Bash: `ROBOT_DEBUG=TRUE && robot -d output -P src tests`
 
 
@@ -105,7 +108,7 @@ Bash: `ROBOT_DEBUG=TRUE && robot -d output -P src tests`
 This library expects teh ROBOT\_DEBUG environment variable to be set.
 You can do this however suits your platform:
 
-Powershell: `$Env:ROBOT_DEBUG = "TRUE"; robot -d output -P src tests `
+Powershell: `$Env:ROBOT_DEBUG = "TRUE"; robot -d output -P src tests `  
 Bash: `ROBOT_DEBUG=TRUE && robot -d output -P src tests`
 
 Execute the tests in this project:
