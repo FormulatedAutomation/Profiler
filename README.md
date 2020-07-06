@@ -30,9 +30,11 @@ production environments. ⚠️
 ### Installation
 
 -   Create a virtual environment
--   pip install -e git+https://github.com/FormulatedAutomation/robot-profiler.git\#egg=robot-profiler
+-   pip install fa-profiler
 
 ### Usage
+
+#### Profiler
 
 ``` {.sourceCode .robotframework}
 *** Settings ***
@@ -43,6 +45,58 @@ Suite Teardown          Teardown
 Teardown
     Write Profile
 ```
+
+If you look in the 'output' directory (which is the current directory, or
+whatever you speficy at runtime), you'll find an fa_report.yml file.
+In this file is a profile of the system you ran on, which includes things like
+
+- Python version and installed packages
+- Environment variables
+- Robot Framework variables (Secrets omitted)
+- Installed programs(on Windows)
+
+It's organized in a way that makes 'diffing' it with a previous report trivial
+and therefore makes it easy to see what's changed between runs.
+
+##### Omitting secrets from the profile
+
+There's a good chance you're setting a varaible to something you don't want
+listed in the logs. In order to prevent secrets from leaking, Profiler will
+'redact' any variables with 'secret' in their name. This will later be
+configurable.
+
+
+
+#### Debugging
+
+The Formulated Automation Profiler also includes some basic debugging tools.
+
+``` {.sourceCode .robotframework}
+*** Settings ***
+Library                 FormulatedAutomation.Profiler
+Suite Teardown          Teardown
+
+*** Keywords ***
+Teardown
+    Pause On Failure # Launch a Dialog to pause execution whenever a task fails
+    Write Profile
+
+*** Keywords ***
+Some Task
+    Set Breakpoint # Pause execution and drop to Python's 'pdb' debugger
+    Do Some Other Task
+    Pause for Debug # Pause with a Dialog regardless of failure
+```
+
+Pause on Failure and Pause for Debug only occur if the environment variable
+'ROBOT_DEBUG' is set to TRUE. This prevents pausing in production if the
+keywords are accidentally set.
+
+__Command Line Example:__
+
+Powershell: `$Env:ROBOT_DEBUG = "TRUE"; robot -d output -P src tests `
+Bash: `ROBOT_DEBUG=TRUE && robot -d output -P src tests`
+
 
 ### Testing
 
