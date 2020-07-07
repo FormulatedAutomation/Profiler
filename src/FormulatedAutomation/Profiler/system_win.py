@@ -62,21 +62,25 @@ class SystemWin(SystemBase):
         return sorted(software_list, key=lambda p: p['name'])
 
     def _get_office_info(self):
-        """ Get information about Office manually """
-        a_reg = winreg.ConnectRegistry(None, winreg.HKEY_LOCAL_MACHINE)
-        a_key = winreg.OpenKey(
-            a_reg,
-            r"SOFTWARE\Microsoft\Office\ClickToRun\Configuration",
-            0, winreg.KEY_READ | winreg.KEY_WOW64_64KEY)
-        office_details = {
-            'name': 'Office 365',
-            'data_source': 'Registry Lookup',
-        }
-        office_details['version'] = winreg.QueryValueEx(
-            a_key, "VersionToReport")[0]
-        office_details['account'] = winreg.QueryValueEx(
-            a_key, "O365HomePremRetail.EmailAddress")[0]
-        return office_details
+        # TODO: @mdp better exception handling for all the things
+        try:
+            """ Get information about Office manually """
+            a_reg = winreg.ConnectRegistry(None, winreg.HKEY_LOCAL_MACHINE)
+            a_key = winreg.OpenKey(
+                a_reg,
+                r"SOFTWARE\Microsoft\Office\ClickToRun\Configuration",
+                0, winreg.KEY_READ | winreg.KEY_WOW64_64KEY)
+            office_details = {
+                'name': 'Office 365',
+                'data_source': 'Registry Lookup',
+            }
+            office_details['version'] = winreg.QueryValueEx(
+                a_key, "VersionToReport")[0]
+            office_details['account'] = winreg.QueryValueEx(
+                a_key, "O365HomePremRetail.EmailAddress")[0]
+            return office_details
+        except:
+            return {}
 
     def _get_uninstall_list(self):
         return(
