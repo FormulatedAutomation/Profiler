@@ -15,6 +15,7 @@
 # FormulatedAutomation-Profiler
 
 [![FormulatedAutomation](https://circleci.com/gh/FormulatedAutomation/Profiler.svg?style=shield)](https://app.circleci.com/pipelines/github/FormulatedAutomation/Profiler)
+[![PyPI version](https://badge.fury.io/py/fa-profiler.svg)](https://badge.fury.io/py/fa-profiler)
 
 ![image](https://user-images.githubusercontent.com/2868/86496363-2473ff00-bd4b-11ea-868a-ee07a2ace9d9.png)
 
