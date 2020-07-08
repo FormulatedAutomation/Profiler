@@ -11,10 +11,32 @@ executors:
 commands:
   tox:
     description: "Build and test with tox"
+    parameters:
+      windows:
+        default: false
+        type: boolean
     steps:
       - checkout
       - restore_cache:
           key: deps1-{{ .Branch }}-{{ checksum "requirements/dev.txt" }}
+      - when:
+          condition: << parameters.windows >>
+          steps:
+            - run:
+                name: Install Python deps in a venv
+                command: |
+                  python3 -m venv venv
+                  venv\Scripts\Activate.ps1
+                  pip install -r requirements/dev.txt
+      - unless:
+          condition: << parameters.windows >>
+          steps:
+            - run:
+                name: Install Python deps in a venv
+                command: |
+                  python3 -m venv venv
+                  . venv/bin/activate
+                  pip install -r requirements/dev.txt
       - run:
           name: Install Python deps in a venv
           command: |
@@ -36,11 +58,13 @@ jobs:
   build_windows:
     executor: win/default
     steps:
-      - tox
+      - tox:
+        windows: true
   build_linux:
     executor: linux
     steps:
-      - tox
+      - tox:
+        windows: false
 
 workflows:
   version: 2
