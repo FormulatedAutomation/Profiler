@@ -62,7 +62,8 @@ It's organized in a way that makes 'diffing' it with a previous report trivial
 and therefore makes it easy to see what's changed between runs.
 
 
-[Sample Report from Linux CI](https://35-274999902-gh.circle-artifacts.com/0/output/fa_report.yaml)
+[Sample Report from Windows CI](https://59-274999902-gh.circle-artifacts.com/0/output/fa_report.yaml)
+[Sample Report from Linux CI](https://60-274999902-gh.circle-artifacts.com/0/output/fa_report.yaml)
 
 ##### Omitting secrets from the profile
 
