@@ -1,8 +1,16 @@
-version: 2
-jobs:
-  build:
+version: 2.1
+
+orbs:
+  win: circleci/windows@2.2.0
+
+executors:
+  linux:
     docker:
       - image: circleci/python:3.8
+
+jobs:
+  build_windows:
+    executor: win/default
     steps:
       - checkout
       - restore_cache:
@@ -10,7 +18,27 @@ jobs:
       - run:
           name: Install Python deps in a venv
           command: |
-            python3 -m venv venv
+            pip install -r requirements/dev.txt
+      - save_cache:
+          key: deps1-{{ .Branch }}-{{ checksum "requirements/dev.txt" }}
+          paths:
+            - "venv"
+      - run:
+          command: |
+            tox
+      - store_artifacts:
+          path: output
+
+  build_linux:
+    executor: linux
+    steps:
+      - checkout
+      - restore_cache:
+          key: deps1-{{ .Branch }}-{{ checksum "requirements/dev.txt" }}
+      - run:
+          name: Install Python deps in a venv
+          command: |
+            python3 -m venv venv:
             . venv/bin/activate
             pip install -r requirements/dev.txt
       - save_cache:
@@ -23,3 +51,11 @@ jobs:
             tox
       - store_artifacts:
           path: output
+
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build_linux
+      - build_windows
