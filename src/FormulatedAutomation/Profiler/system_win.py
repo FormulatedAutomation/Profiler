@@ -20,51 +20,55 @@ class SystemWin(SystemBase):
 
     def get_programs(self):
         return {
-            'uninstall_list': self._get_uninstall_list(),
-            'office_info': self._get_office_info(),
+            'uninstall_list': self.__get_uninstall_list(),
+            'office_info': self.__get_office_info(),
         }
 
     def _dump_program_list_from_hive(self, hive, flag):
         """ Dump the registry listed programs"""
-        a_reg = winreg.ConnectRegistry(None, hive)
-        a_key = winreg.OpenKey(
-            a_reg,
-            r"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall",
-            0, winreg.KEY_READ | flag)
+        try:
+            a_reg = winreg.ConnectRegistry(None, hive)
+            a_key = winreg.OpenKey(
+                a_reg,
+                r"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall",
+                0, winreg.KEY_READ | flag)
 
-        count_subkey = winreg.QueryInfoKey(a_key)[0]
+            count_subkey = winreg.QueryInfoKey(a_key)[0]
 
-        software_list = []
+            software_list = []
 
-        for i in range(count_subkey):
-            software = {}
-            try:
-                asubkey_name = winreg.EnumKey(a_key, i)
-                asubkey = winreg.OpenKey(a_key, asubkey_name)
-                software['name'] = winreg.QueryValueEx(
-                    asubkey, "DisplayName")[0]
-                software['data_source'] = "Uninstall List"
-
+            for i in range(count_subkey):
+                software = {}
                 try:
-                    software['version'] = winreg.QueryValueEx(
-                        asubkey, "DisplayVersion")[0]
-                except EnvironmentError:
-                    software['version'] = 'undefined'
-                try:
-                    software['publisher'] = winreg.QueryValueEx(
-                        asubkey, "Publisher")[0]
-                except EnvironmentError:
-                    software['publisher'] = 'undefined'
-                software_list.append(software)
-            except EnvironmentError:
-                continue
+                    asubkey_name = winreg.EnumKey(a_key, i)
+                    asubkey = winreg.OpenKey(a_key, asubkey_name)
+                    software['name'] = winreg.QueryValueEx(
+                        asubkey, "DisplayName")[0]
+                    software['data_source'] = "Uninstall List"
 
-        return sorted(software_list, key=lambda p: p['name'])
+                    try:
+                        software['version'] = winreg.QueryValueEx(
+                            asubkey, "DisplayVersion")[0]
+                    except EnvironmentError:
+                        software['version'] = 'undefined'
+                    try:
+                        software['publisher'] = winreg.QueryValueEx(
+                            asubkey, "Publisher")[0]
+                    except EnvironmentError:
+                        software['publisher'] = 'undefined'
+                    software_list.append(software)
+                except EnvironmentError:
+                    continue
+            return sorted(software_list, key=lambda p: p['name'])
+        except FileNotFoundError:
+            return []
 
-    def _get_office_info(self):
+
+    def __get_office_info(self):
+        """ Get more detailed Office info than you get from the Uninstall
+        list """
         # TODO: @mdp better exception handling for all the things
         try:
-            """ Get information about Office manually """
             a_reg = winreg.ConnectRegistry(None, winreg.HKEY_LOCAL_MACHINE)
             a_key = winreg.OpenKey(
                 a_reg,
@@ -79,10 +83,10 @@ class SystemWin(SystemBase):
             office_details['account'] = winreg.QueryValueEx(
                 a_key, "O365HomePremRetail.EmailAddress")[0]
             return office_details
-        except:
+        except FileNotFoundError: # Handle registry access or missing errors
             return {}
 
-    def _get_uninstall_list(self):
+    def __get_uninstall_list(self):
         return(
             self._dump_program_list_from_hive(
                 winreg.HKEY_LOCAL_MACHINE, winreg.KEY_WOW64_32KEY)
