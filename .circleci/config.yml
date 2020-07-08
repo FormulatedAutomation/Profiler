@@ -3,21 +3,18 @@ version: 2.1
 orbs:
   win: circleci/windows@2.2.0
 
-jobs:
-  test_windows:
-    steps:
-      - checkout
-      - run:
-          name: Install python deps
-          command: pip install -r requirements/dev.txt
-      - run:
-          command: tox
-      - store_artifacts:
-          path: output
-
-  test_linux:
+executors:
+  linux:
     docker:
       - image: circleci/python:3.8
+      
+  windows:
+    name: win/default
+    shell: powershell.exe
+
+commands:
+  tox:
+    description: "Build and test with tox"
     steps:
       - checkout
       - restore_cache:
@@ -39,8 +36,12 @@ jobs:
       - store_artifacts:
           path: output
 
-workflows:
-  test:
-    jobs:
-      - test_linux
-      - test_windows
+jobs:
+  build_windows:
+    executor: windows
+    steps:
+      - tox
+  build_linux:
+    executor: linux
+    steps:
+      - tox
