@@ -59,12 +59,12 @@ jobs:
     executor: win/default
     steps:
       - tox:
-        windows: true
+          windows: true
   build_linux:
     executor: linux
     steps:
       - tox:
-        windows: false
+          windows: false
 
 workflows:
   version: 2
