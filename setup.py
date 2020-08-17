@@ -10,7 +10,10 @@ from os.path import abspath, dirname, join
 from setuptools import setup
 
 CURDIR = dirname(abspath(__file__))
-REQUIREMENTS = ['robotframework >= 3.0']
+REQUIREMENTS = [
+    'robotframework >= 3.0',
+    'pyyaml >= 5.3.1'
+]
 with open(join(CURDIR, 'src', 'FormulatedAutomation', 'version.py')) as f:
     VERSION = re.search("^VERSION = '(.*)'", f.read()).group(1)
 with open(join(CURDIR, 'README.md'), encoding='utf-8') as f:
@@ -43,5 +46,5 @@ setup(
     classifiers=CLASSIFIERS,
     install_requires=REQUIREMENTS,
     package_dir={'': 'src'},
-    packages=['FormulatedAutomation']
+    packages=['FormulatedAutomation', 'FormulatedAutomation.Profiler']
 )
