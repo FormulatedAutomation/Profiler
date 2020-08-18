@@ -59,7 +59,9 @@ class Debug:
     # launching it in production
     def __is_debug_mode(self):
         env = os.getenv('ROBOT_DEBUG', 'FALSE').upper()
-        return ["TRUE", "1"].index(env) >= 0
+        if env in ["TRUE", "1"]:
+            return True
+        return False
 
     # In order to use "Pause Execution" we need to import Dialog
     def __import_required_libraries(self):
