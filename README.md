@@ -41,7 +41,7 @@ production environments. ⚠️
 
 ``` {.sourceCode .robotframework}
 *** Settings ***
-Library                 FormulatedAutomation.Profiler
+Library                 FormulatedAutomation.Profiler.System
 Suite Teardown          Teardown
 
 *** Keywords ***
@@ -80,7 +80,8 @@ The Formulated Automation Profiler also includes some basic debugging tools.
 
 ``` {.sourceCode .robotframework}
 *** Settings ***
-Library                 FormulatedAutomation.Profiler
+Library                 FormulatedAutomation.Profiler.Debug
+Library                 FormulatedAutomation.Profiler.System
 Suite Teardown          Teardown
 
 *** Keywords ***
