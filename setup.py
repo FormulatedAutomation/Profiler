@@ -12,7 +12,7 @@ from setuptools import setup
 CURDIR = dirname(abspath(__file__))
 REQUIREMENTS = [
     'robotframework >= 3.0',
-    'pyyaml >= 5.3.1'
+    'pyyaml >= 5.3'
 ]
 with open(join(CURDIR, 'src', 'FormulatedAutomation', 'version.py')) as f:
     VERSION = re.search("^VERSION = '(.*)'", f.read()).group(1)
